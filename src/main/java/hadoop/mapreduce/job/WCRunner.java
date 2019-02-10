@@ -25,6 +25,9 @@ public class WCRunner {
 
         Configuration conf = new Configuration();
 
+        // 在linux环境的idea下运行，需将jar包导入，添加基本yarn配置(mapred-site.xml,yarn-site.xml)
+        // 且需加入配置,conf.set("mapreduce.job.jar","xxx.jar");
+
         Job wcJob = Job.getInstance(conf);
 
         // 设置整个job所用的那些类在哪个jar包
@@ -46,7 +49,7 @@ public class WCRunner {
         // 指定输入数据存放路径
         FileInputFormat.setInputPaths(wcJob, new Path("/wc/data"));
         // 指定处理结果输出路径
-        FileOutputFormat.setOutputPath(wcJob,new Path("/wc/output"));
+        FileOutputFormat.setOutputPath(wcJob, new Path("/wc/output"));
 
         // 将job提交给集群运行,boolean值为true表示显示执行过程
         wcJob.waitForCompletion(true);
